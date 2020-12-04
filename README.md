@@ -7,13 +7,13 @@ FlexContainer is a react component to make flexible layouts easier in React.
 ### Installation
 
 ```
-npm install react-fc-layout
+npm install flexcontainer-react
 ```
 
 or
 
 ```
-yarn add react-fc-layout
+yarn add flexcontainer-react
 ```
 
 <br>
@@ -21,7 +21,7 @@ yarn add react-fc-layout
 ### Import it like this
 
 ```js
-import FlexContainer from "react-fc-layout";
+import FlexContainer from "flexcontainer-react";
 ```
 
 <br>

@@ -1,6 +1,6 @@
 {
-  "name": "react-flexcontainer-layout",
-  "version": "0.1.0",
+  "name": "flexcontainer-react",
+  "version": "0.1.1",
   "description": "A React component that makes the creation of flexible layouts easier",
   "main": "./lib/FlexContainer.js",
   "author": "Elia Chiarucci",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eliachiarucci/react-flexcontainer-layout"
+    "url": "https://github.com/eliachiarucci/flexcontainer-react"
   },
   "scripts": {
     "build": "webpack"
