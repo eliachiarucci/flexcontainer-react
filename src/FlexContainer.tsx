@@ -18,8 +18,8 @@ let FlexContainerStyles = createUseStyles(() => ({
 
 interface FlexContainerProps {
   className?: string;
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
   flex?: string;
   type?: "horizontal" | "vertical";
   alignSelf?: "auto" | "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
