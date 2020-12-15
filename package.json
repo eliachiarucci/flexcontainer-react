@@ -1,6 +1,6 @@
 {
   "name": "flexcontainer-react",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A React component that makes the creation of flexible layouts easier",
   "main": "./lib/FlexContainer.js",
   "author": "Elia Chiarucci",

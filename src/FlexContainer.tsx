@@ -25,7 +25,7 @@ interface FlexContainerProps {
   alignSelf?: "auto" | "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
   justifyContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly";
   alignItems?: "auto" | "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
-  wrap?: "nowrap" | "wrap" | "wrap-reverse";
+  flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
   minWidth?: string;
   minHeight?: string;
   overflow?: string;
@@ -74,7 +74,7 @@ export const FlexContainer = (props?: FlexContainerProps) => {
     padding: props.padding,
     margin: props.margin,
     overflow: props.overflow,
-    wrap: props.wrap || "nowrap",
+    flexWrap: props.flexWrap,
     ...props.style,
   };
   useEffect(() => {
