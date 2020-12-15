@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useEffect, useState } from "react";
 import { createUseStyles } from "react-jss";
 
 let FlexContainerStyles = createUseStyles(() => ({
@@ -39,7 +39,7 @@ interface FlexContainerProps {
 
 export const FlexContainer = (props?: FlexContainerProps) => {
   const divRef: any = useRef(null);
-
+  const [modChildrens, setModChildrens] = useState<any>();
   useLayoutEffect(() => {
     const width: number = divRef.current.offsetWidth;
     const height: number = divRef.current.offsetHeight;
@@ -63,47 +63,53 @@ export const FlexContainer = (props?: FlexContainerProps) => {
 
   let style = FlexContainerStyles();
   let customStyle = {
-    width: props.width || "unset",
-    height: props.height || "unset",
-    flex: props.flex || "unset",
+    width: props.width,
+    height: props.height,
+    flex: props.flex,
     alignSelf: props.alignSelf || "center",
     justifyContent: props.justifyContent || "flex-start",
     alignItems: props.alignItems || "baseline",
-    minWidth: props.minWidth || 0,
-    minHeight: props.minHeight || 0,
-    padding: props.padding || 0,
-    margin: props.margin || 0,
-    overflow: props.overflow || "unset",
+    minWidth: props.minWidth,
+    minHeight: props.minHeight,
+    padding: props.padding,
+    margin: props.margin,
+    overflow: props.overflow,
     wrap: props.wrap || "nowrap",
     ...props.style,
   };
-
-  if (Array.isArray(props.children)) {
-    // If there is more than 1 children, apply "gap"
-    var mod_childrens = props.children.map((children, index) => {
-      var lastIndex = props.children.length;
-      var marginTop = index != 0 && props.type === "vertical" ? props.gap / 2 : "unset";
-      var marginBottom = index != lastIndex - 1 && lastIndex != 1 && props.type === "vertical" ? props.gap / 2 : "unset";
-      var marginLeft = index != 0 && props.type === "horizontal" ? props.gap / 2 : "unset";
-      var marginRight = index != lastIndex - 1 && lastIndex != 1 && props.type === "horizontal" ? props.gap / 2 : "unset";
-
-      return React.cloneElement(children, {
-        key: index,
-        style: {
-          marginTop: marginTop + "px",
-          marginBottom: marginBottom + "px",
-          marginLeft: marginLeft + "px",
-          marginRight: marginRight + "px",
-        },
-      });
-    });
-  } else {
-    mod_childrens = props.children;
-  }
+  useEffect(() => {
+    setModChildrens(
+      React.Children.map(props.children, (children, index) => {
+        console.log(children);
+        var lastIndex = React.Children.count(props.children);
+        var marginTop: number = index != 0 && props.type === "vertical" ? props.gap / 2 : 0;
+        var marginBottom: number = index != lastIndex - 1 && lastIndex != 1 && props.type === "vertical" ? props.gap / 2 : 0;
+        var marginLeft: number = index != 0 && props.type === "horizontal" ? props.gap / 2 : 0;
+        var marginRight: number = index != lastIndex - 1 && lastIndex != 1 && props.type === "horizontal" ? props.gap / 2 : 0;
+        const { style } = children.props;
+        if (style !== undefined) {
+          marginTop += parseInt(style.marginTop) || 0;
+          marginBottom += parseInt(style.marginBottom) || 0;
+          marginLeft += parseInt(style.marginLeft) || 0;
+          marginRight += parseInt(style.marginRight) || 0;
+        }
+        return React.cloneElement(children, {
+          key: index,
+          style: {
+            ...style,
+            marginTop: marginTop + "px",
+            marginBottom: marginBottom + "px",
+            marginLeft: marginLeft + "px",
+            marginRight: marginRight + "px",
+          },
+        });
+      })
+    );
+  }, []);
 
   return (
     <div ref={divRef} style={customStyle} className={style[props.type || "horizontal"] + " " + props.className}>
-      {mod_childrens}
+      {modChildrens}
     </div>
   );
 };
