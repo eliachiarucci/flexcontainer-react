@@ -80,7 +80,6 @@ export const FlexContainer = (props?: FlexContainerProps) => {
   useEffect(() => {
     setModChildrens(
       React.Children.map(props.children, (children, index) => {
-        console.log(children);
         var lastIndex = React.Children.count(props.children);
         var marginTop: number = index != 0 && props.type === "vertical" ? props.gap / 2 : 0;
         var marginBottom: number = index != lastIndex - 1 && lastIndex != 1 && props.type === "vertical" ? props.gap / 2 : 0;
